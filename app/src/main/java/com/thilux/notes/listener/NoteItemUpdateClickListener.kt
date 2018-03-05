@@ -1,7 +1,10 @@
 package com.thilux.notes.listener
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
+import com.thilux.notes.EXTRA_FIELD_NOTE
+import com.thilux.notes.activity.NoteActivity
 import com.thilux.notes.db.NoteRepository
 import com.thilux.notes.model.Note
 
@@ -12,7 +15,9 @@ class NoteItemUpdateClickListener(val note: Note, val context: Context) : View.O
 
     override fun onClick(view: View?) {
 
-        NoteRepository(context).update(note)
+        val intent = Intent(context, NoteActivity::class.java)
+        intent.putExtra(EXTRA_FIELD_NOTE, note)
+        context.startActivity(intent)
 
     }
 }

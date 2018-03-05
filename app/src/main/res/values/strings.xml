@@ -8,4 +8,11 @@
     <string name="dialog_delete_note_title">Delete note</string>
     <string name="dialog_delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="dialog_delete_note_deleted">Note deleted!</string>
+
+    <string name="activity_note_activity_title_create">Create a note</string>
+    <string name="activity_note_activity_title_update">Updating note</string>
+    <string name="activity_note_title_hint">Title</string>
+    <string name="activity_note_content_hint">Content of the note</string>
+    <string name="activity_note_button_add">Create</string>
+    <string name="activity_note_burron_cancel">Cancel</string>
 </resources>
