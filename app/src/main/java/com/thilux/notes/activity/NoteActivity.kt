@@ -19,6 +19,8 @@ class NoteActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_note)
 
         if (intent.hasExtra(EXTRA_FIELD_NOTE)){
+            textNoteLayoutTitle.text = getText(R.string.activity_note_activity_title_update)
+            buttonNoteAddUpdate.text = getText(R.string.activity_note_button_update)
             isUpdate = true
             val data: Bundle = intent.extras
             existingNote = data.getParcelable<Note>(EXTRA_FIELD_NOTE)
