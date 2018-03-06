@@ -3,11 +3,13 @@ package com.thilux.notes.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.thilux.notes.EXTRA_FIELD_NOTE
 import com.thilux.notes.R
 import com.thilux.notes.db.NoteRepository
 import com.thilux.notes.model.Note
 import kotlinx.android.synthetic.main.activity_note.*
+import timber.log.Timber
 
 class NoteActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,6 +26,8 @@ class NoteActivity : AppCompatActivity(), View.OnClickListener {
             isUpdate = true
             val data: Bundle = intent.extras
             existingNote = data.getParcelable<Note>(EXTRA_FIELD_NOTE)
+            editNoteTitle.setText(existingNote?.title, TextView.BufferType.EDITABLE)
+            editNoteContent.setText(existingNote?.content, TextView.BufferType.EDITABLE)
         }
 
         buttonNoteAddUpdate.setOnClickListener(this)
@@ -32,16 +36,16 @@ class NoteActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
 
-        if (view.equals(buttonNoteAddUpdate)){
+        if (view == buttonNoteAddUpdate){
             if (isUpdate){
                 updateNote()
             }else{
                 createNote()
             }
 
-        }else{ // view.equals(buttonCancel)
-            finish()
         }
+
+        finish()
 
     }
 
@@ -51,8 +55,9 @@ class NoteActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateNote(){
-        existingNote.let {
-            NoteRepository(this).update(it!!)
-        }
+        val updatedNote = Note(existingNote!!.id, editNoteTitle.text.toString(), editNoteContent.text.toString())
+        updatedNote.creationDate = existingNote!!.creationDate
+        Timber.d("Requesting to update note ${existingNote!!.id} - ${existingNote!!.title}")
+        NoteRepository(this).update(updatedNote)
     }
 }

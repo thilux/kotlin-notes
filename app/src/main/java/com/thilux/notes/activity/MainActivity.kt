@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         buttonAddNote.setOnClickListener(this)
     }
 
-    private fun loadNotes() {
+    fun loadNotes() {
         var notes = NoteRepository(this).findAll()
         val notesListAdapter = NotesListAdapter(this, notes)
         listNotes.adapter = notesListAdapter
